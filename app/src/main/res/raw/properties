@@ -1,11 +1,11 @@
-onboarding_item1_image=baseline_back_hand_24
-onboarding_item1_title=Welcome
-onboarding_item1_description=Welcome to our app!
+onboarding_item1_image=baseline_analytics_24
+onboarding_item1_title=Welcome to Wallnut!
+onboarding_item1_description=Take control of your finances with Wallnut! Our app helps you effortlessly track your transactions and analyze your spending patterns, empowering you to make informed financial decisions.
 
-onboarding_item2_image=baseline_back_hand_24
-onboarding_item2_title=Explore
-onboarding_item2_description=Explore the amazing features.
+onboarding_item2_image=baseline_attach_money_24
+onboarding_item2_title=Track Transactions, Anytime, Anywhere
+onboarding_item2_description=Wallnut provides a secure and convenient way to track your transactions. Automatically categorize expenses, view insightful reports, and stay on top of your spending habits with ease.
 
-onboarding_item3_image=baseline_back_hand_24
-onboarding_item3_title=Get Started
-onboarding_item3_description=Get started and enjoy!
+onboarding_item3_image=baseline_wallet_24
+onboarding_item3_title=Stay Informed with SMS Insights
+onboarding_item3_description=Let Wallnut effortlessly analyze your SMS notifications to extract transaction information. Gain a clear understanding of your financial activity, making it simpler than ever to manage your finances.

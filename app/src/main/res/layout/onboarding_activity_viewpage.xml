@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="265dp"
-        android:layout_height="273dp"
+        android:layout_width="277dp"
+        android:layout_height="266dp"
         android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,6 +22,7 @@
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:text="TextView"
+        android:fontFamily="@font/montserratregular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +34,7 @@
         android:layout_height="58dp"
         android:gravity="center"
         android:text="TextView"
+        android:fontFamily="@font/montserratbold"
         app:layout_constraintBottom_toTopOf="@+id/descOnboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
