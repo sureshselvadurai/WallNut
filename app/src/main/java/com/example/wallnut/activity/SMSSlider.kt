@@ -9,9 +9,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.example.wallnut.model.Messages
 import com.example.wallnut.R
+import com.example.wallnut.helper.MessagesHelper
+import com.example.wallnut.helper.PermissionHelper
+import com.example.wallnut.model.Messages
 
 
 class SMSSlider : AppCompatActivity() {
@@ -34,7 +35,6 @@ class SMSSlider : AppCompatActivity() {
                 finish() // Exit the frame
             }
         }
-
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,6 @@ class SMSSlider : AppCompatActivity() {
 
     private fun readSMSData(){
         val messageManager = Messages
-
         val cursor =
             this.contentResolver.query(Telephony.Sms.CONTENT_URI, null, null, null, null)
 
@@ -57,16 +56,9 @@ class SMSSlider : AppCompatActivity() {
                 val body = it.getString(bodyIndex)
                 val date = it.getLong(dateIndex)
                 messageManager.addMessage(address, body, date)
-                System.out.println(body);
-
             }
         }
-    }
-    private fun isSmsPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.RECEIVE_SMS
-        ) == PackageManager.PERMISSION_GRANTED
+        MessagesHelper.writeToFile(messageManager,this)
     }
 
     private fun requestSmsPermission(callback: () -> Unit) {
@@ -78,9 +70,11 @@ class SMSSlider : AppCompatActivity() {
         )
     }
 
-    fun readSMS(view: View){
 
-        if (!isSmsPermissionGranted()) {
+    fun readSMS(view: View){
+        var permissonHelper = PermissionHelper
+
+        if (!permissonHelper.isSmsPermissionGranted(this)) {
             requestSmsPermission {
                 // Permission granted callback
                 readSMSData()
