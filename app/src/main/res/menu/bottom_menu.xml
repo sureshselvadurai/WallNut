@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/reportstab"
+        android:id="@+id/reportsTab"
         android:title="Reports"
         android:icon="@drawable/baseline_analytics_24"/>
     <item
-        android:id="@+id/messagestab"
+        android:id="@+id/messagesTab"
         android:title="Messages"
         android:icon="@drawable/baseline_message_24"/>
 </menu>

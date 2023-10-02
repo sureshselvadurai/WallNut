@@ -28,10 +28,7 @@ class MessagesHelper {
             val c = 1;
         }
 
-        val configState1 = context.getSharedPreferences( "configState", Context.MODE_PRIVATE)
-        val messages = configState1?.getString("messages","")
-
-        return messages
+        return fileContents
     }
 
     companion object {

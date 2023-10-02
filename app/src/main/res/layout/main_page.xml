@@ -21,12 +21,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="408dp"
-        android:layout_height="469dp"
+    <FrameLayout
+        android:id="@+id/DisplayView"
+        android:layout_width="400dp"
+        android:layout_height="446dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bgView"/>
+        app:layout_constraintTop_toBottomOf="@+id/bgView" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="35dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/baseline_post_add_24"
+        android:gravity="center"
+        android:onClick="refreshSMS"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:tooltipText="Refresh Messages"
+        app:layout_constraintTop_toTopOf="@+id/bgView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
