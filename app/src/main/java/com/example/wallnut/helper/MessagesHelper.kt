@@ -10,25 +10,8 @@ import java.io.FileInputStream
 import java.io.IOException
 
 class MessagesHelper {
-
-    private fun readFile(filePath: String,context: Context): String? {
-        var fileContents: String? = null
-        val file = File(filePath)
-
-        try {
-            val inputStream = FileInputStream(file)
-            val length = file.length().toInt()
-            val buffer = ByteArray(length)
-
-            inputStream.read(buffer)
-            fileContents = String(buffer)
-
-            inputStream.close()
-        } catch (e: IOException) {
-            val c = 1;
-        }
-
-        return fileContents
+    fun readFile(filePath: String): String? {
+        return Companion.readFile(filePath)
     }
 
     companion object {
@@ -51,6 +34,26 @@ class MessagesHelper {
             editor?.putString("messages",json.toString());
             editor?.commit();
         }
+
+        fun readFile(filePath: String): String? {
+            var fileContents: String? = null
+            val file = File(filePath)
+
+            try {
+                val inputStream = FileInputStream(file)
+                val length = file.length().toInt()
+                val buffer = ByteArray(length)
+
+                inputStream.read(buffer)
+                fileContents = String(buffer)
+
+                inputStream.close()
+            } catch (e: IOException) {
+                val c = 1;
+            }
+            return fileContents
+        }
+
     }
 
 }

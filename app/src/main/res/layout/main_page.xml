@@ -43,6 +43,19 @@
         android:tooltipText="Refresh Messages"
         app:layout_constraintTop_toTopOf="@+id/bgView" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="106dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="76dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/DisplayView"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/teal"
+        android:gravity="center"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/bgView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -10,7 +10,10 @@ import com.example.wallnut.R
 import com.example.wallnut.databinding.MainPageBinding
 import com.example.wallnut.fragment.messagesDisplay
 import com.example.wallnut.fragment.reportDisplay
+import com.example.wallnut.helper.MessagesHelper
 import com.example.wallnut.helper.PermissionHelper
+import com.example.wallnut.model.Report
+import com.google.gson.Gson
 
 class MainPageActivity : AppCompatActivity() {
 
@@ -20,6 +23,14 @@ class MainPageActivity : AppCompatActivity() {
         binding = MainPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         replaceFragment(reportDisplay())
+
+        var messagesHelper =  MessagesHelper()
+        var reportString = messagesHelper.readFile("/data/user/0/com.example.wallnut/files/report.json")
+        val gson = Gson()
+        var report = gson.fromJson(reportString, Report::class.java)
+
+
+        binding.textView3.text = "$ " + report.netBalence
 
         binding.bottomNavigationView.setOnItemSelectedListener() {
             when(it.itemId){

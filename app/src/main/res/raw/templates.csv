@@ -1,0 +1,2 @@
+transactionIdPattern||amountPattern||dateTimePattern||merchantNamePattern||debitMessageRegex
+1||Amount debited: \\$\\d+\\.\\d{2}||Date and Time: \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}||purchase at Lucky||(?i)Date: (?<date>\w+ \d+)|Amount: \$(?<amount>\d+\.\d+)|Merchant: (?<merchant>[^,]+)|ID: (?<identifier>[\w-]+)

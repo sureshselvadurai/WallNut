@@ -1,20 +1,15 @@
 package com.example.wallnut.model
 
-import org.json.JSONObject
-
 object Messages {
-    private val messageData: MutableList<JSONObject> = mutableListOf()
+    private val messageData: MutableList<Message> = mutableListOf()
 
-    fun addMessage(address: String, body: String, date: Long) {
-        val messageJson = JSONObject().apply {
-            put("address", address)
-            put("body", body)
-            put("date", date)
-        }
+    fun addMessage(address: String, body: String, date: String, messageId: String, type: String) {
+        val messageJson = Message(address,body,date,messageId,type)
         messageData.add(messageJson)
     }
 
-    fun getMessageData(): List<JSONObject> {
+
+    fun getMessageData(): List<Message> {
         return messageData
     }
 }
