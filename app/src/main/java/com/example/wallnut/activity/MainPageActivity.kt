@@ -35,9 +35,6 @@ class MainPageActivity : AppCompatActivity() {
             binding.textView3.text = "$ 0 "
         }
 
-
-
-
         binding.bottomNavigationView.setOnItemSelectedListener() {
             when(it.itemId){
                 R.id.messagesTab -> replaceFragment(messagesDisplay())
@@ -47,6 +44,8 @@ class MainPageActivity : AppCompatActivity() {
             }
             true
         }
+
+        binding.button.setOnClickListener {refreshSMS(this)}
     }
 
     private fun replaceFragment(fragment: Fragment){
@@ -56,10 +55,7 @@ class MainPageActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    fun refreshSMS(view: View){
-        val configState = this.getSharedPreferences( "configState", Context.MODE_PRIVATE)
-        val messages = configState?.getString("messages","")
-        val smsSlider = SMSSlider()
-        smsSlider.readSMS(view)
+    fun refreshSMS(context: Context){
+        SMSSlider().readSMS(context)
     }
 }

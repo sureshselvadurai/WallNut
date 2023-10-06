@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.wallnut.R
+import com.example.wallnut.databinding.MainPageBinding
 import com.example.wallnut.helper.MessagesHelper
 import com.example.wallnut.helper.PermissionHelper
 import com.example.wallnut.helper.ReportHelper
@@ -27,6 +28,8 @@ import java.time.format.DateTimeFormatter
 
 
 class SMSSlider : AppCompatActivity() {
+
+    private lateinit var binding: MainPageBinding
 
     private var onSmsPermissionGrantedCallback: (() -> Unit)? = null
 
@@ -50,12 +53,17 @@ class SMSSlider : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sms_permission)
+        binding = MainPageBinding.inflate(layoutInflater)
+        binding.button.setOnClickListener { readSMS(this) }
     }
 
-    private fun readSMSData(): Messages {
+
+
+    private fun readSMSData(context:Context): Messages {
         val messageManager = Messages
         val cursor =
-            this.contentResolver.query(Telephony.Sms.CONTENT_URI, null, null, null, null)
+            context.contentResolver.query(Telephony.Sms.CONTENT_URI, null, null, null, null)
+
 
         cursor?.use {
             val addressIndex = it.getColumnIndex(Telephony.Sms.ADDRESS)
@@ -78,7 +86,7 @@ class SMSSlider : AppCompatActivity() {
                 messageManager.addMessage(address, body, dateFormat,messageId,type)
             }
         }
-        MessagesHelper.writeToFile(messageManager,this)
+        MessagesHelper.writeToFile(messageManager,context)
         return messageManager
 
     }
@@ -97,23 +105,22 @@ class SMSSlider : AppCompatActivity() {
         }
     }
 
-    fun createTemplateList(messages:Messages): List<Template> {
+    fun createTemplateList(messages:Messages,context: Context): List<Template> {
         val templatePath = "app/src/main/res/raw/templates.csv"
         val transactionHelper = TransactionHelper()
-        val templates =  transactionHelper.readCsvToMessagesList(messages,templatePath,this)
+        val templates =  transactionHelper.readCsvToMessagesList(messages,templatePath,context)
         return templates
     }
 
-
-    fun readSMS(view: View){
+    fun readSMS(context: Context){
         var permissonHelper = PermissionHelper
         try {
-            if (!permissonHelper.isSmsPermissionGranted(this)) {
+            if (!permissonHelper.isSmsPermissionGranted(context)) {
                 requestSmsPermission {
-                    readProcessSMS()
+                    readProcessSMS(context)
                 }
             } else {
-                readProcessSMS()
+                readProcessSMS(context)
             }
         }
         catch (e:Exception){
@@ -121,17 +128,17 @@ class SMSSlider : AppCompatActivity() {
         }
     }
 
-    private fun readProcessSMS(){
-        val messages = readSMSData()
-        val templates = createTemplateList(messages)
+    fun readProcessSMS(context: Context){
+        val messages = readSMSData(context)
+        val templates = createTemplateList(messages,context)
         val transactionList =  trasactionListWHCreator(messages,templates)
         var reportHelper = ReportHelper()
         var report = reportHelper.reportCreator(transactionList)
 
-        val fileOutputStream: FileOutputStream = this.openFileOutput("report.json", Context.MODE_PRIVATE)
+        val fileOutputStream: FileOutputStream = context.openFileOutput("report.json", Context.MODE_PRIVATE)
         fileOutputStream.write(report.toString().toByteArray())
 
-        startActivity(Intent(this, IntroRouterActivity::class.java))
+        context.startActivity(Intent(context, IntroRouterActivity::class.java))
     }
 
     private fun trasactionListWHCreator(messages: Messages, templates: List<Template>): MutableList<Transaction> {

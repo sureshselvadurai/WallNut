@@ -27,8 +27,10 @@
         android:layout_height="446dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bgView" />
+        app:layout_constraintTop_toBottomOf="@+id/bgView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button"
@@ -53,6 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/teal"
         android:gravity="center"
+        android:onClick="refreshSMS"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/bgView" />
 
