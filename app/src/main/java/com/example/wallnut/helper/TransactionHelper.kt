@@ -13,8 +13,8 @@ class TransactionHelper {
     fun extractFieldsFromMessage(message: String, regexPattern: String, transactionID: String): Transaction {
         val transactionList = mutableListOf<Template>()
 
-        var message = message.replace(" ","")
-        var regexPattern  = regexPattern.replace(" ","")
+        var message = message.lowercase().replace(" ","").replace("\n","")
+        var regexPattern  = regexPattern.lowercase().replace(" ","")
         val regex  = regexPattern.toRegex()
 
         val matchResults = regex.findAll(message)
@@ -25,9 +25,13 @@ class TransactionHelper {
         for (matchResult in matchResults) {
             val groupValues = matchResult.groups
             extractedInfo.putID("Success")
-            when {
-                groupValues["date"] != null -> extractedInfo.date = groupValues["date"]!!.value
-                groupValues["amount"] != null -> extractedInfo.amount =groupValues["amount"]!!.value
+
+            if(groupValues["amount"] != null){
+                extractedInfo.amount =groupValues["amount"]!!.value
+            }
+
+            if(groupValues["date"] != null){
+                extractedInfo.date =groupValues["date"]!!.value
             }
         }
 
@@ -53,12 +57,9 @@ class TransactionHelper {
                 var record: List<String>? = line?.split("||")
 
                 val transactionIdPattern = record?.get(0) ?: ""
-                val amountPattern = record?.get(1) ?: ""
-                val dateTimePattern = record?.get(2) ?: ""
-                val merchantNamePattern = record?.get(3) ?: ""
-                val debitMessageRegex = record?.get(4) ?: ""
+                val debitMessageRegex = record?.get(1) ?: ""
 
-                val template = Template(transactionIdPattern,amountPattern,dateTimePattern,merchantNamePattern,debitMessageRegex)
+                val template = Template(transactionIdPattern,debitMessageRegex)
                 messagesList.add(template)
 
 

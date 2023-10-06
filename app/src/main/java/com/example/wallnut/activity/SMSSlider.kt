@@ -36,7 +36,7 @@ class SMSSlider : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
+        println("Checker11---")
         when (grantResults[0]) {
             0 -> {
                 onSmsPermissionGrantedCallback?.invoke()
@@ -85,11 +85,16 @@ class SMSSlider : AppCompatActivity() {
 
     private fun requestSmsPermission(callback: () -> Unit) {
         onSmsPermissionGrantedCallback = callback
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.READ_SMS),
-            PackageManager.PERMISSION_GRANTED
-        )
+        try {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_SMS),
+                PackageManager.PERMISSION_GRANTED
+            )
+            println("Checker11")
+        }catch (e:Exception){
+            println("Checker")
+        }
     }
 
     fun createTemplateList(messages:Messages): List<Template> {
@@ -102,16 +107,21 @@ class SMSSlider : AppCompatActivity() {
 
     fun readSMS(view: View){
         var permissonHelper = PermissionHelper
-
-        if (!permissonHelper.isSmsPermissionGranted(this)) {
-            requestSmsPermission {
-                // Permission granted callback
+        try {
+            if (!permissonHelper.isSmsPermissionGranted(this)) {
+                requestSmsPermission {
+                    readProcessSMS()
+                }
+            } else {
+                readProcessSMS()
             }
-        } else {
-            // Permission already granted
-
         }
+        catch (e:Exception){
+            println("Permission Granted")
+        }
+    }
 
+    private fun readProcessSMS(){
         val messages = readSMSData()
         val templates = createTemplateList(messages)
         val transactionList =  trasactionListWHCreator(messages,templates)

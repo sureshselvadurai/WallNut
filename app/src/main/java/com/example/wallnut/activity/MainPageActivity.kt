@@ -29,8 +29,14 @@ class MainPageActivity : AppCompatActivity() {
         val gson = Gson()
         var report = gson.fromJson(reportString, Report::class.java)
 
+        if(report!=null){
+            binding.textView3.text = "$ " + report.netBalence
+        }else{
+            binding.textView3.text = "$ 0 "
+        }
 
-        binding.textView3.text = "$ " + report.netBalence
+
+
 
         binding.bottomNavigationView.setOnItemSelectedListener() {
             when(it.itemId){
@@ -53,5 +59,7 @@ class MainPageActivity : AppCompatActivity() {
     fun refreshSMS(view: View){
         val configState = this.getSharedPreferences( "configState", Context.MODE_PRIVATE)
         val messages = configState?.getString("messages","")
+        val smsSlider = SMSSlider()
+        smsSlider.readSMS(view)
     }
 }

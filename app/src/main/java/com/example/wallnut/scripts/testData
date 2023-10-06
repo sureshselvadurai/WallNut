@@ -1,0 +1,3 @@
+transactionalert-date:(?<date>\w+\d{1,2}),amount:\$(?<amount>[0-9.]+),merchant:(?<merchant>[^,]+),creditfromwellsfargobank.id:wf-789012
+Transaction Alert - Date: Oct 2, Amount: $520.25, Merchant: XYZ Store, Credit from Wells Fargo Bank. ID: WF-789012
+

@@ -63,8 +63,6 @@ class messagesDisplay : Fragment() {
             }
         }
 
-        val c = 0
-
     }
 
 }
