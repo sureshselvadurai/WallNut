@@ -5,7 +5,9 @@ object Messages {
 
     fun addMessage(address: String, body: String, date: String, messageId: String, type: String) {
         val messageJson = Message(address,body,date,messageId,type)
-        messageData.add(messageJson)
+        if(!messageData.contains(messageJson)) {
+            messageData.add(messageJson)
+        }
     }
 
 

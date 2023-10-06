@@ -18,7 +18,6 @@ import com.example.wallnut.helper.ReportHelper
 import com.example.wallnut.helper.TransactionHelper
 import com.example.wallnut.model.Message
 import com.example.wallnut.model.Messages
-import com.example.wallnut.model.Report
 import com.example.wallnut.model.Template
 import com.example.wallnut.model.Transaction
 import java.io.FileOutputStream
@@ -39,7 +38,6 @@ class SMSSlider : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        println("Checker11---")
         when (grantResults[0]) {
             0 -> {
                 onSmsPermissionGrantedCallback?.invoke()
@@ -54,7 +52,7 @@ class SMSSlider : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sms_permission)
         binding = MainPageBinding.inflate(layoutInflater)
-        binding.button.setOnClickListener { readSMS(this) }
+//        binding.button.setOnClickListener { readSMS(this) }
     }
 
 
@@ -108,7 +106,7 @@ class SMSSlider : AppCompatActivity() {
     fun createTemplateList(messages:Messages,context: Context): List<Template> {
         val templatePath = "app/src/main/res/raw/templates.csv"
         val transactionHelper = TransactionHelper()
-        val templates =  transactionHelper.readCsvToMessagesList(messages,templatePath,context)
+        val templates =  transactionHelper.readCsvToTemplatesList(context)
         return templates
     }
 
@@ -128,12 +126,31 @@ class SMSSlider : AppCompatActivity() {
         }
     }
 
+
+
+    fun readSMS(view: View){
+        var permissonHelper = PermissionHelper
+        try {
+            if (!permissonHelper.isSmsPermissionGranted(this)) {
+                requestSmsPermission {
+                    readProcessSMS(this)
+                }
+            } else {
+                readProcessSMS(this)
+            }
+        }
+        catch (e:Exception){
+            println("Permission Not Granted")
+        }
+    }
+
+
     fun readProcessSMS(context: Context){
         val messages = readSMSData(context)
         val templates = createTemplateList(messages,context)
-        val transactionList =  trasactionListWHCreator(messages,templates)
+        val transactionList =  trasactionListWHCreator(context,messages,templates)
         var reportHelper = ReportHelper()
-        var report = reportHelper.reportCreator(transactionList)
+        var report = reportHelper.reportCreator(transactionList,context)
 
         val fileOutputStream: FileOutputStream = context.openFileOutput("report.json", Context.MODE_PRIVATE)
         fileOutputStream.write(report.toString().toByteArray())
@@ -141,10 +158,13 @@ class SMSSlider : AppCompatActivity() {
         context.startActivity(Intent(context, IntroRouterActivity::class.java))
     }
 
-    private fun trasactionListWHCreator(messages: Messages, templates: List<Template>): MutableList<Transaction> {
+    private fun trasactionListWHCreator(context: Context, messages: Messages, templates: List<Template>): MutableList<Transaction> {
 
         var transactionHeper = TransactionHelper()
         var trasactionListWH = mutableListOf<Transaction>()
+        var reportHelper = ReportHelper()
+
+        val messagesInfo =  reportHelper.readCsvToTemplateInfoList(context)
 
         for(template:Template in templates) {
             for (message: Message in messages.getMessageData()) {
@@ -156,8 +176,15 @@ class SMSSlider : AppCompatActivity() {
                     transactionID
                 )
                 if(trasaction.id=="Success") {
-                    trasactionListWH.add(trasaction)
+                    if(!trasactionListWH.contains(trasaction)) {
+                        trasactionListWH.add(trasaction)
+                        val transactionInfo = messagesInfo.get(transactionID)
+                        if (transactionInfo != null) {
+                            trasaction.transactionInfo = transactionInfo
+                        }
+                    }
                 }
+
             }
         }
         return trasactionListWH

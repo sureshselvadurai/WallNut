@@ -2,7 +2,6 @@ package com.example.wallnut.helper
 
 import android.content.Context
 import com.example.wallnut.R
-import com.example.wallnut.model.Messages
 import com.example.wallnut.model.Template
 import com.example.wallnut.model.Transaction
 import java.io.BufferedReader
@@ -20,7 +19,7 @@ class TransactionHelper {
         val matchResults = regex.findAll(message)
         val groupValues :List<Transaction> = mutableListOf()
 
-        val extractedInfo = Transaction("", transactionID, "", "")
+        val extractedInfo = Transaction("", transactionID, "", "", HashMap())
 
         for (matchResult in matchResults) {
             val groupValues = matchResult.groups
@@ -40,8 +39,7 @@ class TransactionHelper {
     }
 
 
-    fun readCsvToMessagesList(messages:Messages,
-                              filePath: String,context:Context): List<Template> {
+    fun readCsvToTemplatesList(context: Context): List<Template> {
         val messagesList = mutableListOf<Template>()
         try {
 
