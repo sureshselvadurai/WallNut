@@ -21,7 +21,6 @@ class IntroRouterActivity: AppCompatActivity() {
             editor?.commit();
             startActivity(Intent(this, OnboardingActivity::class.java))
             finish()
-
         }else if(!PermissionHelper.isSmsPermissionGranted(this)){
             startActivity(Intent(this, SMSSlider::class.java))
             finish()

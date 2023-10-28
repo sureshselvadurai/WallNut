@@ -1,2 +1,6 @@
 transactionIdPattern||type||SpendType||Others
+1||Debit||Entertainment||NA
 2||Credit||NA||NA
+3||Debit||Food||NA
+4||Debit||Utilities||NA
+5||Debit||Loan||NA

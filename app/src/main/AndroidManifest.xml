@@ -23,9 +23,6 @@
         android:theme="@style/Theme.WallNut"
         tools:targetApi="34">
         <activity
-            android:name=".activity.WriteSlider"
-            android:exported="false" />
-        <activity
             android:name=".activity.SMSSlider"
             android:exported="false" />
         <activity

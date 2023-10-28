@@ -18,8 +18,11 @@ import com.example.wallnut.helper.ReportHelper
 import com.example.wallnut.helper.TransactionHelper
 import com.example.wallnut.model.Message
 import com.example.wallnut.model.Messages
+import com.example.wallnut.model.Report
 import com.example.wallnut.model.Template
 import com.example.wallnut.model.Transaction
+import com.google.gson.Gson
+import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.time.Instant
 import java.time.ZoneId
@@ -146,17 +149,37 @@ class SMSSlider : AppCompatActivity() {
 
 
     fun readProcessSMS(context: Context){
+
+        val fileName = "report.json";
         val messages = readSMSData(context)
         val templates = createTemplateList(messages,context)
         val transactionList =  trasactionListWHCreator(context,messages,templates)
         var reportHelper = ReportHelper()
         var report = reportHelper.reportCreator(transactionList,context)
 
-        val fileOutputStream: FileOutputStream = context.openFileOutput("report.json", Context.MODE_PRIVATE)
+        val fileExists = context.getFileStreamPath(fileName).exists()
+        if (fileExists) {
+            var messagesHelper =  MessagesHelper()
+            var reportString = messagesHelper.readFile("/data/user/0/com.example.wallnut/files/report.json")
+            val gson = Gson()
+            var currentReport = gson.fromJson(reportString, Report::class.java)
+            report.budget = currentReport.budget
+        }
+
+        val fileOutputStream: FileOutputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE)
         fileOutputStream.write(report.toString().toByteArray())
 
         context.startActivity(Intent(context, IntroRouterActivity::class.java))
     }
+
+    private fun readExistingReport(context: Context, fileName: String): String {
+        val fileInputStream: FileInputStream = context.openFileInput(fileName)
+        val buffer = ByteArray(fileInputStream.available())
+        fileInputStream.read(buffer)
+        fileInputStream.close()
+        return String(buffer, Charsets.UTF_8)
+    }
+
 
     private fun trasactionListWHCreator(context: Context, messages: Messages, templates: List<Template>): MutableList<Transaction> {
 

@@ -7,11 +7,14 @@
 
     <View
         android:id="@+id/bgView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_width="411dp"
+        android:layout_height="201dp"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></View>
+
+    />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -23,41 +26,125 @@
 
     <FrameLayout
         android:id="@+id/DisplayView"
-        android:layout_width="400dp"
-        android:layout_height="446dp"
+        android:layout_width="413dp"
+        android:layout_height="432dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bgView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0">
+
+    </FrameLayout>
 
     <Button
         android:id="@+id/button"
         android:layout_width="35dp"
         android:layout_height="38dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/baseline_post_add_24"
         android:gravity="center"
         android:onClick="refreshSMS"
-        app:layout_constraintEnd_toEndOf="parent"
         android:tooltipText="Refresh Messages"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/bgView" />
+
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="106dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="76dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/DisplayView"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/teal"
+        android:layout_width="157dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="84dp"
         android:gravity="center"
         android:onClick="refreshSMS"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/bgView" />
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bgView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="35dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/baseline_mode_edit_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="409dp"
+        android:layout_height="45dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="185dp"
+        android:layout_height="17dp"
+        android:paddingStart="11dp"
+        android:gravity="center"
+        android:onClick="refreshSMS"
+        android:text="TextView"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="185dp"
+        android:layout_height="17dp"
+        android:gravity="center"
+        android:onClick="refreshSMS"
+        android:text="TextView"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="@+id/view" />
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="315dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="200dp"
+        android:max="100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bgView" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="140dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="28dp"
+        android:background="@color/teal"
+        android:gravity="center"
+        android:text="Budget - Not Set"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/bgView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="42dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="200dp"
+        android:gravity="center"
+        android:text="%"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

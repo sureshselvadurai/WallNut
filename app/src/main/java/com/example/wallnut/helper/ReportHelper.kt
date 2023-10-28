@@ -15,14 +15,24 @@ class ReportHelper {
 
         val messagesInfo =  readCsvToTemplateInfoList(context)
 
-
         var netBalence = 0.0;
-        var report = Report("","","")
+        var totalSpends = 0.0;
+        var totalIncome = 0.0;
+        var report = Report("","","","")
 
         for(i:Transaction in transactionList){
-            netBalence += i.amount.toFloat();
+            if(i.transactionInfo?.get("type")=="Debit"){
+                netBalence -= i.amount.toFloat();
+                totalSpends += i.amount.toFloat();
+            }else{
+                netBalence += i.amount.toFloat();
+                totalIncome += i.amount.toFloat();
+            }
+
         }
         report.netBalence = netBalence.toString()
+        report.totalIncome = totalIncome.toString()
+        report.totalSpends = totalSpends.toString()
         return  report
     }
 
