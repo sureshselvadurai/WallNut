@@ -100,9 +100,7 @@ class SMSSlider : AppCompatActivity() {
                 arrayOf(Manifest.permission.READ_SMS),
                 PackageManager.PERMISSION_GRANTED
             )
-            println("Checker11")
         }catch (e:Exception){
-            println("Checker")
         }
     }
 

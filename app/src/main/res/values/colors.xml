@@ -5,4 +5,7 @@
     <color name="transparent">#00ffffff</color>
     <color name="teal">#0B83CD</color>
     <color name="lightBlue">#E4E5FA</color>
+    <color name="green">#44AA0B</color>
+    <color name="lgreen">#CDDFC4</color>
+    <color name="lred">#E1B2A9</color>
 </resources>

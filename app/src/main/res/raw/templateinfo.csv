@@ -4,3 +4,4 @@ transactionIdPattern||type||SpendType||Others
 3||Debit||Food||NA
 4||Debit||Utilities||NA
 5||Debit||Loan||NA
+6||BillReminder||Loan from WF||NA
