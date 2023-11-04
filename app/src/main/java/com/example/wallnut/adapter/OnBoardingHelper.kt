@@ -1,4 +1,4 @@
-package com.example.wallnut.helper
+package com.example.wallnut.adapter
 
 import OnboardingPagerAdapter
 import android.content.Context
@@ -12,6 +12,15 @@ import com.example.wallnut.activity.IntroRouterActivity
 import com.example.wallnut.model.OnboardingItem
 import java.util.Properties
 
+/**
+ * A helper class for managing onboarding screens using a ViewPager in an Android application.
+ *
+ * @param context The application context.
+ * @param viewPager The ViewPager used for displaying onboarding screens.
+ * @param nextButton The refreshButton used to navigate to the next onboarding screen.
+ * @param resources The application's resources, used for loading onboarding data.
+ * @param previousButton The refreshButton used to navigate to the previous onboarding screen.
+ */
 class OnboardingHelper(
     private val context: Context,
     private val viewPager: ViewPager,
@@ -20,6 +29,11 @@ class OnboardingHelper(
     private val previousButton: Button
 ) {
 
+    /**
+     * Loads onboarding items from a properties file and creates a list of [OnboardingItem] objects.
+     *
+     * @return A list of [OnboardingItem] objects.
+     */
     private fun loadOnboardingItems(): List<OnboardingItem> {
 
         val onboardingItems = mutableListOf<OnboardingItem>()
@@ -30,14 +44,14 @@ class OnboardingHelper(
         properties.load(rawResource)
 
         // Read properties and create OnboardingItem objects
-        for (i in 1..3) {
+        for (i in 1.rangeTo(3)) {
             val imageResId = resources.getIdentifier(
-                properties.getProperty("onboarding_item"+i+"_image"),
-                "drawable",
-                context.packageName
+                /* name = */ properties.getProperty("onboarding_item$i" + "_image"),
+                /* defType = */ "drawable",
+                /* defPackage = */ context.packageName
             )
-            val title = properties.getProperty("onboarding_item"+i+"_title", "Title")
-            val description = properties.getProperty("onboarding_item"+i+"_description", "Description")
+            val title = properties.getProperty("onboarding_item$i" + "_title", "Title")
+            val description = properties.getProperty("onboarding_item$i" + "_description", "Description")
 
             onboardingItems.add(OnboardingItem(imageResId, title, description))
         }
@@ -45,6 +59,9 @@ class OnboardingHelper(
         return onboardingItems
     }
 
+    /**
+     * Sets up the onboarding experience, including ViewPager, buttons, and page change listeners.
+     */
     fun setupOnboarding() {
         val onboardingItems = loadOnboardingItems()
         previousButton.visibility = View.GONE
@@ -57,13 +74,14 @@ class OnboardingHelper(
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
-                // Check if the last page is reached and update button text accordingly
+                // Check if the last page is reached and update refreshButton text accordingly
             }
+
             override fun onPageScrollStateChanged(state: Int) {}
         })
 
         nextButton.setOnClickListener {
-            // Handle next button click
+            // Handle next refreshButton click
             val currentPosition = viewPager.currentItem
             if (currentPosition < onboardingItems.size - 1) {
                 viewPager.currentItem = currentPosition + 1
@@ -71,20 +89,18 @@ class OnboardingHelper(
                 val intent = Intent(context, IntroRouterActivity::class.java)
                 context.startActivity(intent)
             }
-            if(currentPosition>=0){
+            if (currentPosition >= 0) {
                 previousButton.visibility = View.VISIBLE
             }
         }
 
         previousButton.setOnClickListener {
-            // Handle next button click
+            // Handle previous refreshButton click
             val currentPosition = viewPager.currentItem
             viewPager.currentItem = currentPosition - 1
-            if (currentPosition > 1) {
-            } else {
+            if (currentPosition <= 1) {
                 previousButton.visibility = View.GONE
             }
         }
-
     }
 }

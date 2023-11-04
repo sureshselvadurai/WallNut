@@ -13,13 +13,14 @@
         android:layout_marginTop="100dp"
         android:fontFamily="@font/montserratbold"
         android:gravity="center"
-        android:text="Permission Request - Read SMS for Transaction Tracking"
+        android:text="@string/permission_request_read_sms_for_transaction_tracking"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
 
     <TextView
         android:id="@+id/dialog_message"
@@ -27,22 +28,20 @@
         android:layout_height="206dp"
         android:fontFamily="@font/montserratregular"
         android:gravity="center"
-        android:text="We need your consent to read SMS messages related to transactions for providing improved transaction tracking and enhanced services. Your privacy and security are our top priority, and the SMS access will be used exclusively for transaction tracking purposes."
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:text="@string/we_need_your_consent_to_read_sms_messages_related_to_transactions_for_providing_improved_transaction_tracking_and_enhanced_services_your_privacy_and_security_are_our_top_priority_and_the_sms_access_will_be_used_exclusively_for_transaction_tracking_purposes"
+        app:layout_constraintBottom_toTopOf="@+id/refresh_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/refresh_button"
         android:layout_width="61dp"
         android:layout_height="65dp"
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="172dp"
         android:background="@drawable/baseline_arrow_circle_right_24"
         android:gravity="center"
-        android:text=""
-        android:onClick="readSMS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.603"

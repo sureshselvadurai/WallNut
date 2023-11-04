@@ -1,10 +1,29 @@
 <resources>
+    <string name="net_balance">Net Balance: %1$s$</string>
+    <string name="total_spends">Total Spends: $ %1$s</string>
+    <string name="total_income">Total Income: $ %1$s</string>
+    <string name="loan_spend">Loan Spend: %1$s $</string>
+    <string name="utilities_spend">%1$s $</string>
+    <string name="food_spend">Food Spend: %1$s $</string>
+    <string name="entertainment_spend">Entertainment Spend: %1$s $</string>
+    <string name="savings">Savings: %1$s $</string>
+    <string name="remaining_budget">Remaining Budget: %1$s $</string>
+    <string name="safe_spend">Safe Spend: %1$s $</string>
+    <string name="savings_percent">1$s %</string>
+    <string name="previous_month_report_up">Spends are up by %1$s percent. Please review</string>
+    <string name="previous_month_report_down">Spends are down by %1$s percent. Great Job !!</string>
+    <string name="previous_month_report_same">Spends are the same as the previous month. Keep Hustling</string>
+    <string name="budget_not_set">Budget: Not Set</string>
+    <string name="budget_set">Budget: $ %1$s</string>
+    <string name="budget_percent">Budget: %1$s %</string>
     <string name="app_name">WallNut</string>
     <string name="button">Button</string>
     <string name="textview">TextView</string>
     <string name="todo">TODO</string>
     <string name="RequestSMS">Request SMS</string>
     <string name="title_activity_smsslider">SMSSlider</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="we_need_your_consent_to_read_sms_messages_related_to_transactions_for_providing_improved_transaction_tracking_and_enhanced_services_your_privacy_and_security_are_our_top_priority_and_the_sms_access_will_be_used_exclusively_for_transaction_tracking_purposes">We need your consent to read SMS messages related to transactions for providing improved transaction tracking and enhanced services. Your privacy and security are our top priority, and the SMS access will be used exclusively for transaction tracking purposes.</string>
+    <string name="permission_request_read_sms_for_transaction_tracking">Permission Request - Read SMS for Transaction Tracking</string>
+    <string name="bill_reminder">Info : %1$s , %2$s , Amount : $%3$s</string>
 </resources>
