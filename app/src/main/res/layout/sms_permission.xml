@@ -29,14 +29,15 @@
         android:fontFamily="@font/montserratregular"
         android:gravity="center"
         android:text="@string/we_need_your_consent_to_read_sms_messages_related_to_transactions_for_providing_improved_transaction_tracking_and_enhanced_services_your_privacy_and_security_are_our_top_priority_and_the_sms_access_will_be_used_exclusively_for_transaction_tracking_purposes"
-        app:layout_constraintBottom_toTopOf="@+id/refresh_button"
+        app:layout_constraintBottom_toTopOf="@+id/refresh_button1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
 
     <Button
-        android:id="@+id/refresh_button"
+        android:id="@+id/refresh_button1"
         android:layout_width="61dp"
+        android:onClick="generateReportSlider"
         android:layout_height="65dp"
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="172dp"

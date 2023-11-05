@@ -17,7 +17,7 @@ data class BillReminder(
     private var amount: String
 ) {
     // A date formatter to convert date strings to Date objects.
-    val dateFormatter = SimpleDateFormat("MMMdd", Locale.US)
+    private val dateFormatter = SimpleDateFormat("MMMdd", Locale.US)
 
     /**
      * Converts the date string to a Date object using the date formatter.

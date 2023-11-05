@@ -15,7 +15,6 @@
     <string name="previous_month_report_same">Spends are the same as the previous month. Keep Hustling</string>
     <string name="budget_not_set">Budget: Not Set</string>
     <string name="budget_set">Budget: $ %1$s</string>
-    <string name="budget_percent">Budget: %1$s %</string>
     <string name="app_name">WallNut</string>
     <string name="button">Button</string>
     <string name="textview">TextView</string>

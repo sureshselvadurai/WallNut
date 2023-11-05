@@ -5,10 +5,16 @@ import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import android.Manifest
 import android.app.Activity
+import android.content.Intent
 import android.provider.Telephony
+import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.wallnut.R
+import com.example.wallnut.activity.IntroRouterActivity
+import com.example.wallnut.activity.MainPageActivity
+import com.example.wallnut.activity.SMSSlider
+import com.example.wallnut.databinding.SmsPermissionBinding
 import com.example.wallnut.utils.Constants
 import com.example.wallnut.model.Message
 import com.example.wallnut.model.Report
@@ -42,7 +48,16 @@ class BaseReport(private val context: Context) {
     private var fileExists: Boolean = false
 
     init {
-        generateReport()
+        when (context) {
+            is MainPageActivity -> {
+                generateReport()
+            }
+            is SMSSlider -> {
+                generateReport()
+                val intent = Intent(context, IntroRouterActivity::class.java)
+                context.startActivity(intent)
+            }
+        }
     }
 
     /**
@@ -84,7 +99,7 @@ class BaseReport(private val context: Context) {
         try {
             ActivityCompat.requestPermissions(
                 context as Activity,
-                arrayOf(Manifest.permission.READ_SMS),
+                arrayOf(Manifest.permission.READ_SMS,Manifest.permission.READ_EXTERNAL_STORAGE),
                 PackageManager.PERMISSION_GRANTED
             )
         } catch (e: Exception) {

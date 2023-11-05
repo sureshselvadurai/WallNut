@@ -1,12 +1,15 @@
 package com.example.wallnut.report
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.text.Html
 import android.text.method.ScrollingMovementMethod
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.wallnut.R
 import com.example.wallnut.activity.MainPageActivity
@@ -19,6 +22,7 @@ import com.example.wallnut.model.Report
 import com.example.wallnut.utils.Constants
 import com.example.wallnut.utils.Utils
 import com.google.gson.Gson
+import java.io.File
 import java.io.FileOutputStream
 import java.util.Calendar
 
@@ -76,6 +80,43 @@ class GenerateReportView(private val mainPageActivity: MainPageActivity) {
         setupSpendReport()
         setReminderMessages()
         setupSummaryHeaders()
+    }
+
+    private fun shouldAlertUser(context: Activity, report: Report) {
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences("AlertPrefs", Context.MODE_PRIVATE)
+        try {
+            val value =
+                ((report.getTotalSpends().toFloat() / report.getBudget().toFloat()) * 100).toInt()
+        }// Get the current month and year
+        catch (e : Exception){
+            println("et")
+        }
+        val currentDate = Calendar.getInstance()
+        val currentMonth = currentDate.get(Calendar.MONTH)
+        val currentYear = currentDate.get(Calendar.YEAR)
+
+        // Check if the user has already been alerted this month
+        val alertedMonth = sharedPreferences.getInt("alertedMonth", -1)
+        val alertedYear = sharedPreferences.getInt("alertedYear", -1)
+
+        if (2 > 100 && (alertedMonth != currentMonth || alertedYear != currentYear)) {
+            // Show an alert dialog to the user
+            val alertDialogBuilder = AlertDialog.Builder(context)
+            alertDialogBuilder.setTitle("Budget Alert")
+            val messageText = TextView(context)
+            messageText.text = "Budget Exceeded"
+            messageText.setTextColor(Color.RED)
+            alertDialogBuilder.setView(messageText)
+            alertDialogBuilder.setPositiveButton("OK") { dialog, _ ->
+                // Update the shared preferences to mark the user as alerted for this month
+                val editor = sharedPreferences.edit()
+                editor.putInt("alertedMonth", currentMonth)
+                editor.putInt("alertedYear", currentYear)
+                editor.apply()
+                dialog.dismiss()
+            }
+            alertDialogBuilder.create().show()
+        }
     }
 
     private fun setupPieChartReport() {
@@ -228,18 +269,19 @@ class GenerateReportView(private val mainPageActivity: MainPageActivity) {
         } else {
             binding.budgetSetView.text = mainPageActivity.getString(R.string.budget_set, report.getBudget())
             setupProgressBar()
+            shouldAlertUser(mainPageActivity,report)
         }
     }
 
     private fun setupProgressBar() {
-        val percentage = ((report.getTotalSpends().toFloat() / report.getBudget().toFloat()) * 100)
+        val percentage = ((report.getTotalSpends().toFloat() / report.getBudget().toFloat()) * 100).toInt()
         binding.progressBar.progress = percentage.toInt()
         if (percentage >= 100) {
             binding.progressBar.progressTintList = ColorStateList.valueOf(Color.RED)
         } else if (percentage >= 80) {
             binding.progressBar.progressTintList = ColorStateList.valueOf(Color.YELLOW)
         }
-        binding.budgetPercentText.text = mainPageActivity.getString((percentage.toInt()), R.string.budget_percent)
+        binding.budgetPercentText.text = "$percentage%"
     }
 
     private fun setupBalanceHeader() {
@@ -269,10 +311,11 @@ class GenerateReportView(private val mainPageActivity: MainPageActivity) {
             val budgetAmount = input.text.toString()
             binding.budgetSetView.text = mainPageActivity.getString(R.string.budget_set, budgetAmount)
             report.setBudget(budgetAmount)
-            setupProgressBar()
-            val fileOutputStream: FileOutputStream = mainPageActivity.openFileOutput("report.json", Context.MODE_PRIVATE)
+            setupBudgetReports()
+
+            val fileOutputStream: FileOutputStream = mainPageActivity.openFileOutput(Constants.REPORT, Context.MODE_PRIVATE)
             fileOutputStream.write(report.toString().toByteArray())
-            BaseReport(mainPageActivity)
+            GenerateReportView(mainPageActivity)
         }
 
         builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
