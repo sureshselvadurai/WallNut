@@ -66,7 +66,7 @@
                 android:layout_height="31dp"
                 android:fontFamily="@font/josefinsanssemibold"
                 android:gravity="center"
-                android:text="Spend Report"
+                android:text="@string/spend_report"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/montserratregular"
-                android:text="Loan/EMI"
+                android:text="@string/loan_emi"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,7 +90,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/montserratregular"
-                android:text="0 $"
+                android:text="@string/_0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -101,7 +101,7 @@
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/montserratregular"
                 android:layout_marginTop="12dp"
-                android:text="Utilities"
+                android:text="@string/utilities"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
-                android:text="0 $"
+                android:text="@string/_0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/loan_spend_view" />
 
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
-                android:text="0 $"
+                android:text="@string/_0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/utilities_spend_view" />
 
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
-                android:text="0 $"
+                android:text="@string/_0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/food_spend_view" />
 
@@ -145,7 +145,7 @@
                 android:fontFamily="@font/montserratregular"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
-                android:text="0 $"
+                android:text="@string/_0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/entertainment_spend_view" />
 
@@ -156,7 +156,7 @@
                 android:fontFamily="@font/montserratregular"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
-                android:text="Food"
+                android:text="@string/food"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -167,7 +167,7 @@
                 android:fontFamily="@font/montserratregular"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
-                android:text="Entertainment"
+                android:text="@string/entertainment"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -178,7 +178,7 @@
                 android:fontFamily="@font/montserratregular"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
-                android:text="Income"
+                android:text="@string/income"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -197,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Savings and budget Reprt"
+                android:text="@string/savings_and_budget_reprt"
                 android:gravity="center"
                 android:fontFamily="@font/josefinsanssemibold"
                 android:textSize="13sp"
@@ -213,7 +213,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/josefinsanslight"
                 android:textSize="12sp"
-                android:text="Amount saved : "
+                android:text="@string/amount_saved"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
@@ -226,7 +226,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/josefinsanslight"
                 android:textSize="12sp"
-                android:text="Budget remaining : "
+                android:text="@string/budget_remaining"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
@@ -239,7 +239,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/josefinsanslight"
                 android:textSize="12sp"
-                android:text="Safe spend per day : "
+                android:text="@string/safe_spend_per_day"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -249,7 +249,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="0 $"
+                android:text="@string/_0"
                 android:gravity="center"
                 android:fontFamily="@font/montserratregular"
                 android:textSize="12sp"
@@ -262,7 +262,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="0 $"
+                android:text="@string/_0"
                 android:gravity="center"
                 android:fontFamily="@font/montserratregular"
                 android:textSize="12sp"
@@ -275,7 +275,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
                 android:layout_marginEnd="8dp"
-                android:text="0 $"
+                android:text="@string/_0"
                 android:gravity="center"
                 android:fontFamily="@font/montserratregular"
                 android:textSize="12sp"
@@ -299,8 +299,8 @@
                 android:layout_height="25dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="80dp"
-                android:text="Study recommends 20% savings \n Your current savings"
-                android:textSize="10sp"
+                android:text="@string/study_recommends_20_savings_n_your_current_savings"
+                android:textSize="11sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -311,7 +311,7 @@
                 android:layout_marginTop="80dp"
                 android:layout_marginEnd="4dp"
                 android:gravity="center"
-                android:text="100%"
+                android:text="@string/_100"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -322,10 +322,10 @@
                 android:layout_height="41dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="36dp"
-                android:text="No monthly trend available"
+                android:text="@string/no_monthly_trend_available"
                 android:gravity="center"
                 android:fontFamily="@font/montserratregular"
-                android:textSize="10dp"
+                android:textSize="11sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -336,8 +336,8 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:fontFamily="@font/josefinsanssemibold"
-                android:text="Monthly Change trend"
-                android:textSize="13dp"
+                android:text="@string/monthly_change_trend"
+                android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.32"
                 app:layout_constraintStart_toStartOf="parent"
@@ -362,8 +362,8 @@
                 android:inputType="textMultiLine"
                 android:maxLines="3"
                 android:scrollbars="vertical"
-                android:text="None"
-                android:textSize="12dp"
+                android:text="@string/none"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.592"
                 app:layout_constraintStart_toStartOf="parent"
@@ -375,8 +375,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:textSize="14dp"
-                android:text="Bill Reminders"
+                android:textSize="14sp"
+                android:text="@string/bill_reminders"
                 android:fontFamily="@font/josefinsanssemibold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -408,7 +408,6 @@
         android:layout_marginTop="32dp"
         android:fontFamily="@font/montserratregular"
         android:gravity="center"
-        android:text="TextView"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -442,7 +441,6 @@
         android:paddingStart="11dp"
         android:fontFamily="@font/montserratregular"
         android:gravity="center"
-        android:text="TextView"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintStart_toStartOf="@+id/view"
@@ -454,7 +452,6 @@
         android:layout_height="17dp"
         android:fontFamily="@font/montserratregular"
         android:gravity="center"
-        android:text="TextView"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="@+id/view"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
@@ -467,7 +464,7 @@
         android:layout_height="38dp"
         android:fontFamily="@font/montserratregular"
         android:gravity="center"
-        android:text="%"
+        android:text="@string/percent"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/DisplayView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -484,7 +481,7 @@
         android:gravity="center"
         android:paddingTop="5dp"
         android:paddingBottom="2dp"
-        android:text="Budget - Not Set"
+        android:text="@string/budget_not_set"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

@@ -1,3 +1,8 @@
+/**
+ * `ManageConfig` is responsible for managing the application's configuration and routing logic.
+ *
+ * @param introRouterActivity The activity where this configuration is managed.
+ */
 package com.example.wallnut.config
 
 import android.Manifest
@@ -7,18 +12,12 @@ import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import com.example.wallnut.activity.IntroRouterActivity
 
-/**
- * ManageConfig is responsible for managing the application's configuration and routing logic.
- *
- * @param introRouterActivity The activity where this configuration is managed.
- */
 class ManageConfig(private val introRouterActivity: IntroRouterActivity) {
-
     private var configState: SharedPreferences
     private var isFirstTime: Boolean
 
     /**
-     * Initializes the ManageConfig instance.
+     * Initializes the `ManageConfig` instance.
      */
     init {
         this.isFirstTime = true
@@ -55,6 +54,12 @@ class ManageConfig(private val introRouterActivity: IntroRouterActivity) {
         }
     }
 
+    /**
+     * Check if SMS permission is granted.
+     *
+     * @param context The context in which to check the SMS permission.
+     * @return `true` if SMS permission is granted, `false` otherwise.
+     */
     private fun isSmsPermissionGranted(context: Context): Boolean {
         return ContextCompat.checkSelfPermission(
             context,

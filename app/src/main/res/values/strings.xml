@@ -25,4 +25,23 @@
     <string name="we_need_your_consent_to_read_sms_messages_related_to_transactions_for_providing_improved_transaction_tracking_and_enhanced_services_your_privacy_and_security_are_our_top_priority_and_the_sms_access_will_be_used_exclusively_for_transaction_tracking_purposes">We need your consent to read SMS messages related to transactions for providing improved transaction tracking and enhanced services. Your privacy and security are our top priority, and the SMS access will be used exclusively for transaction tracking purposes.</string>
     <string name="permission_request_read_sms_for_transaction_tracking">Permission Request - Read SMS for Transaction Tracking</string>
     <string name="bill_reminder">Info : %1$s , %2$s , Amount : $%3$s</string>
+    <string name="budget_exceeded">Budget Exceeded</string>
+    <string name="spend_report">Spend Report</string>
+    <string name="loan_emi">Loan/EMI</string>
+    <string name="_0">0 $</string>
+    <string name="utilities">Utilities</string>
+    <string name="food">Food</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="income">Income</string>
+    <string name="savings_and_budget_reprt">Savings and budget Report</string>
+    <string name="amount_saved">Amount saved :</string>
+    <string name="budget_remaining">Budget remaining :</string>
+    <string name="safe_spend_per_day">Safe spend per day :</string>
+    <string name="study_recommends_20_savings_n_your_current_savings">Study recommends 20% savings \n Your current savings</string>
+    <string name="_100">100%</string>
+    <string name="no_monthly_trend_available">No monthly trend available</string>
+    <string name="monthly_change_trend">Monthly Change trend</string>
+    <string name="none">None</string>
+    <string name="bill_reminders">Bill Reminders</string>
+    <string name="percent">%</string>
 </resources>

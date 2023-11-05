@@ -1,7 +1,9 @@
 transactionIdPattern||debitMessageRegex
 1||transactionalert-date:(?<date>\w+\d{1,2}),amount:\$(?<amount>[0-9.]+),debitfrompvrmovies
-2||transactionalert-date:(?<date>\w+\d{1,2}),amount:\$(?<amount>[0-9.]+),credittowellsfargobank.id:wf-789012
+2||transactionalert-date:(?<date>\w+\d{1,2}),amount:\$(?<amount>[0-9.]+),credittowellsfargobank
 3||transactionalert-date:(?<date>\w+\d{1,2}),amount:\$(?<amount>[0-9.]+),debitfromacafe
 4||transactionalert-date:(?<date>\w+\d{1,2}),amount:\$(?<amount>[0-9.]+),debitfromsfpuc
 5||transactionalert-date:(?<date>\w+\d{1,2}),amount:\$(?<amount>[0-9.]+),debitfrompvrbankforhomeloan
-6||billreminder-date:(?<date>\w+\d{1,2}),amount:\$(?<amount>[0-9.]+),pleasepaybyduedate
+6||billreminder-date:(?<date>\w+\d{1,2}),amount:\$(?<amount>[0-9.]+),pleasepaybyduedate,wf
+7||billreminder-date:(?<date>\w+\d{1,2}),amount:\$(?<amount>[0-9.]+),pleasepaybyduedate,sbicarloan
+8||billreminder-date:(?<date>\w+\d{1,2}),amount:\$(?<amount>[0-9.]+),pleasepaybyduedate,ccwf

@@ -30,7 +30,7 @@ data class Message(
      *
      * @return The message address as a CharSequence.
      */
-    fun getAddress(): CharSequence? {
+    fun getAddress(): CharSequence {
         return address
     }
 
@@ -39,7 +39,7 @@ data class Message(
      *
      * @return The message date as a CharSequence.
      */
-    fun getDate(): CharSequence? {
+    fun getDate(): CharSequence {
         return date
     }
 }

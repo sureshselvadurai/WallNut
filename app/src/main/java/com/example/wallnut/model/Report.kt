@@ -135,6 +135,7 @@ data class Report(
         totalIncome = builder.totalIncome
         netBalance = builder.netBalance
         billReminder = builder.billReminder
+        budget = builder.budget
     }
 
     /**

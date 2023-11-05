@@ -22,7 +22,6 @@ import com.example.wallnut.model.Report
 import com.example.wallnut.utils.Constants
 import com.example.wallnut.utils.Utils
 import com.google.gson.Gson
-import java.io.File
 import java.io.FileOutputStream
 import java.util.Calendar
 
@@ -84,13 +83,9 @@ class GenerateReportView(private val mainPageActivity: MainPageActivity) {
 
     private fun shouldAlertUser(context: Activity, report: Report) {
         val sharedPreferences: SharedPreferences = context.getSharedPreferences("AlertPrefs", Context.MODE_PRIVATE)
-        try {
-            val value =
+        val value =
                 ((report.getTotalSpends().toFloat() / report.getBudget().toFloat()) * 100).toInt()
-        }// Get the current month and year
-        catch (e : Exception){
-            println("et")
-        }
+
         val currentDate = Calendar.getInstance()
         val currentMonth = currentDate.get(Calendar.MONTH)
         val currentYear = currentDate.get(Calendar.YEAR)
@@ -99,12 +94,12 @@ class GenerateReportView(private val mainPageActivity: MainPageActivity) {
         val alertedMonth = sharedPreferences.getInt("alertedMonth", -1)
         val alertedYear = sharedPreferences.getInt("alertedYear", -1)
 
-        if (2 > 100 && (alertedMonth != currentMonth || alertedYear != currentYear)) {
+        if (value > 100 && (alertedMonth != currentMonth || alertedYear != currentYear)) {
             // Show an alert dialog to the user
             val alertDialogBuilder = AlertDialog.Builder(context)
             alertDialogBuilder.setTitle("Budget Alert")
             val messageText = TextView(context)
-            messageText.text = "Budget Exceeded"
+            messageText.text = context.getString(R.string.budget_exceeded)
             messageText.setTextColor(Color.RED)
             alertDialogBuilder.setView(messageText)
             alertDialogBuilder.setPositiveButton("OK") { dialog, _ ->
@@ -128,7 +123,7 @@ class GenerateReportView(private val mainPageActivity: MainPageActivity) {
             report.getLoanSpend().toFloat()
         )
         if(report.getTotalSpends().toFloat().toInt()==0){
-            data= emptyList();
+            data= emptyList()
         }
         val colors = listOf(
             Color.parseColor("#FFC0CB"),
@@ -191,7 +186,7 @@ class GenerateReportView(private val mainPageActivity: MainPageActivity) {
         val lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         val remainingDays = lastDay - currentDay
 
-        if (remainingDays <= 0) {
+        if (remainingDays <= 0 || totalAmount.toInt() ==0) {
             return 0.0 // It's the end of the month, no more days left
         }
 
@@ -256,7 +251,7 @@ class GenerateReportView(private val mainPageActivity: MainPageActivity) {
             binding.previousMonthReport.setTextColor(Color.RED)
         } else if (spendPercent < 0) {
             binding.previousMonthReport.text = mainPageActivity.getString(R.string.previous_month_report_down, spendPercent.toString())
-            binding.previousMonthReport.setTextColor(Color.parseColor("#12C30B"))
+            binding.previousMonthReport.setTextColor(Color.parseColor("#034003"))
         } else {
             binding.previousMonthReport.text = mainPageActivity.getString(R.string.previous_month_report_same)
             binding.previousMonthReport.setTextColor(Color.MAGENTA)
@@ -275,7 +270,7 @@ class GenerateReportView(private val mainPageActivity: MainPageActivity) {
 
     private fun setupProgressBar() {
         val percentage = ((report.getTotalSpends().toFloat() / report.getBudget().toFloat()) * 100).toInt()
-        binding.progressBar.progress = percentage.toInt()
+        binding.progressBar.progress = percentage
         if (percentage >= 100) {
             binding.progressBar.progressTintList = ColorStateList.valueOf(Color.RED)
         } else if (percentage >= 80) {

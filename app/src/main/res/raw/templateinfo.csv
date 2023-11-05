@@ -4,4 +4,6 @@ transactionIdPattern||type||SpendType||Others
 3||Debit||Food||NA
 4||Debit||Utilities||NA
 5||Debit||Loan||NA
-6||BillReminder||Loan From Wells Fargo||NA
+6||BillReminder||Home Loan From Wells Fargo||NA
+7||BillReminder||Car Loan From Sbi||NA
+8||BillReminder||Wells Fargo Credit Card Bill||NA

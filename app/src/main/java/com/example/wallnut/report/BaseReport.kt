@@ -5,23 +5,21 @@ import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import android.Manifest
 import android.app.Activity
-import android.content.Intent
 import android.provider.Telephony
-import android.view.View
+import android.content.Intent
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.wallnut.R
-import com.example.wallnut.activity.IntroRouterActivity
 import com.example.wallnut.activity.MainPageActivity
-import com.example.wallnut.activity.SMSSlider
-import com.example.wallnut.databinding.SmsPermissionBinding
 import com.example.wallnut.utils.Constants
 import com.example.wallnut.model.Message
 import com.example.wallnut.model.Report
 import com.example.wallnut.model.Template
 import com.example.wallnut.model.Transaction
+import com.example.wallnut.utils.Utils
 import com.google.gson.Gson
 import java.io.BufferedReader
+import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStreamReader
 import java.text.SimpleDateFormat
@@ -47,16 +45,17 @@ class BaseReport(private val context: Context) {
     private var report: Report = Report("")
     private var fileExists: Boolean = false
 
+
     init {
-        when (context) {
-            is MainPageActivity -> {
-                generateReport()
-            }
-            is SMSSlider -> {
-                generateReport()
-                val intent = Intent(context, IntroRouterActivity::class.java)
-                context.startActivity(intent)
-            }
+        checkExistingReport()
+        generateReport()
+    }
+
+    private fun checkExistingReport() {
+        if(File(Constants.REPORT_PATH).exists()) {
+            val reportString = Utils.readFile(Constants.REPORT_PATH)
+            val gson = Gson()
+            report = gson.fromJson(reportString, Report::class.java)
         }
     }
 
@@ -99,7 +98,7 @@ class BaseReport(private val context: Context) {
         try {
             ActivityCompat.requestPermissions(
                 context as Activity,
-                arrayOf(Manifest.permission.READ_SMS,Manifest.permission.READ_EXTERNAL_STORAGE),
+                arrayOf(Manifest.permission.READ_SMS),
                 PackageManager.PERMISSION_GRANTED
             )
         } catch (e: Exception) {
@@ -118,8 +117,7 @@ class BaseReport(private val context: Context) {
 
         val fileOutputStream: FileOutputStream = context.openFileOutput(Constants.REPORT, Context.MODE_PRIVATE)
         fileOutputStream.write(report.toString().toByteArray())
-
-        (context as Activity).recreate()
+        (context as Activity).startActivity(Intent(context, MainPageActivity::class.java))
     }
 
     /**
@@ -179,6 +177,7 @@ class BaseReport(private val context: Context) {
      * @param dateStr The date string to be analyzed.
      * @return The date flag.
      */
+
     private fun getDateFlag(dateStr: String): Int {
         val dateFormat = SimpleDateFormat("MMMdd")
         val currentDate = Date()
@@ -191,6 +190,7 @@ class BaseReport(private val context: Context) {
         // Create a calendar for the provided date
         val providedDate = dateFormat.parse(dateStr)
         val providedCalendar = Calendar.getInstance()
+
         if (providedDate != null) {
             providedCalendar.time = providedDate
         }
@@ -198,12 +198,16 @@ class BaseReport(private val context: Context) {
         // Get the month of the provided date
         val providedMonth = providedCalendar.get(Calendar.MONTH)
 
+        val monthsDiff = currentMonth - providedMonth
+
         return when {
-            currentMonth == providedMonth -> 1 // Current month
-            (currentMonth - providedMonth == 1) || (currentMonth == 0 && providedMonth == 11) -> 2 // Previous month
-            else -> 3 // Any other case
+            monthsDiff == 0 -> 1 // Current month
+            monthsDiff == 1 || (currentMonth == 0 && providedMonth == 11) -> 2 // Previous month
+            monthsDiff == -1 || (currentMonth == 11 && providedMonth == 0) -> 3 // Next month
+            else -> 4 // Everything else
         }
     }
+
 
     /**
      * Create the report by processing transaction data.
@@ -224,7 +228,12 @@ class BaseReport(private val context: Context) {
             val dateFlag = getDateFlag(i.getDate())
 
             when {
-                dateFlag == 3 -> continue
+                dateFlag == 4 -> continue
+                dateFlag == 3 -> {
+                    if(i.getTransactionInfoBillType() == Constants.BILL_REMINDER)  {
+                        billReminderList.append("${i.getDate()} || ${i.getTransactionInfoSpendType()} || ${i.getAmount()} ||| ")
+                    }
+                }
                 dateFlag == 2 -> {
                     previousMonthSpend += i.getAmount().toFloat()
                     continue
@@ -251,7 +260,7 @@ class BaseReport(private val context: Context) {
         }
 
         // Set the values in the 'report' object
-        report = Report.Builder("")
+        report = Report.Builder(report.getBudget())
             .foodSpend(foodSpend.toString())
             .utilitiesSpend(utilitiesSpend.toString())
             .loanSpend(loanSpend.toString())
@@ -397,5 +406,9 @@ class BaseReport(private val context: Context) {
         if (!messages.contains(messageJson)) {
             messages.add(messageJson)
         }
+    }
+
+    fun invokeCallback() {
+        onSmsPermissionGrantedCallback?.invoke()
     }
 }

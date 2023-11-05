@@ -24,7 +24,7 @@ data class BillReminder(
      *
      * @return The Date object representing the date of the bill reminder.
      */
-    fun getDateAsDate(): Date {
+    fun getDateAsDate(): Date? {
         return dateFormatter.parse(date)
     }
 
