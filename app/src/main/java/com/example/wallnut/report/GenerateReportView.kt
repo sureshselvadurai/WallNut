@@ -23,6 +23,7 @@ import com.example.wallnut.utils.Constants
 import com.example.wallnut.utils.Utils
 import com.google.gson.Gson
 import java.io.FileOutputStream
+import java.lang.Math.round
 import java.util.Calendar
 
 /**
@@ -186,11 +187,12 @@ class GenerateReportView(private val mainPageActivity: MainPageActivity) {
         val lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         val remainingDays = lastDay - currentDay
 
-        if (remainingDays <= 0 || totalAmount.toInt() ==0) {
+        if (remainingDays <= 0 || totalAmount.toInt() == 0) {
             return 0.0 // It's the end of the month, no more days left
         }
 
-        return totalAmount / remainingDays
+        val result = totalAmount / remainingDays
+        return round(result * 10.0) / 10.0
     }
 
     private fun setBudgetReport() {
