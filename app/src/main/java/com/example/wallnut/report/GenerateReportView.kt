@@ -25,6 +25,7 @@ import com.google.gson.Gson
 import java.io.FileOutputStream
 import java.lang.Math.round
 import java.util.Calendar
+import kotlin.math.roundToInt
 
 /**
  * GenerateReportView class is responsible for managing and displaying the report data on the main page.
@@ -192,7 +193,7 @@ class GenerateReportView(private val mainPageActivity: MainPageActivity) {
         }
 
         val result = totalAmount / remainingDays
-        return round(result * 10.0) / 10.0
+        return (result * 10.0).roundToInt() / 10.0
     }
 
     private fun setBudgetReport() {
